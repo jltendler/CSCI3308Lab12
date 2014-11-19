@@ -1,40 +1,23 @@
-import parts
+import facade
 
-
-# The Computer class is a Facade class which will simplify the computer part classes.
-# You should implement this class
-# This class should be able to be called by the running part
-class Computer:
+# The Adaptor class should be implemented so that it has two methods that can be called by the running code.
+# As you can see, it should contain a start function to start the computer, and a getComputerInfo function to get the information of the CPU, memory and hard disk. 
+# You can only use the Computer class from the facade.py you implemented. Do not use the classes in parts.py 
+class Adapter:
     def __init__(self):
-        self.cpu=parts.CPU()
-        self.mem=parts.Memory()
-        self.hd=parts.HardDisk()
-    # implement the class below this line    
-        
+        self.adapt=facade.Computer()
+    def start(self):
+        self.adapt.startComputer()
 
-    def startComputer(self):
-        print("Computer is bein started....")
-        self.cpu.check()
-        self.mem.load()
-        self.hd.mount()
-        print("Boot Sequence Complete")
-        print(" ")
-    
-    def printCPUInfo(self):
-        self.cpu.getInfo()
-    def printMemInfo(self):
-        self.mem.getInfo()
-    def printHDInfo(self):
-        self.hd.getInfo()
+    def getComputerInfo(self):
+        self.adapt.printCPUInfo()
+        self.adapt.printMemInfo()
+        self.adapt.printHDInfo()
 
-
-
-
-
-# The running part
-# Don't modify the following code!
-com=Computer()
-com.startComputer()
-com.printCPUInfo()
-com.printMemInfo()
-com.printHDInfo()
+print("")
+print("Adapter:")
+print("")
+# The running part. You should not modify this part.
+newcomputer=Adapter()
+newcomputer.start()
+newcomputer.getComputerInfo()
